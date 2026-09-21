@@ -35,17 +35,17 @@ button{border:0;border-radius:14px;padding:12px 16px;font-size:16px;font-weight:
 @media(max-width:850px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:520px){.wrap{padding:10px}.panel{gap:8px}button{font-size:14px;padding:11px 12px}.grid{gap:9px}.card{padding:8px}.poke-img,.img-fallback{height:105px}.name{font-size:18px}.chip{width:40px;height:54px;font-size:16px}}
 @media print{
-  @page{size:A4 portrait;margin:8mm}
+  @page{size:A4 portrait;margin:0}
   html,body{background:#fff}
   .wrap{max-width:none;padding:0}
   /* A4：9 隻固定同一張紙，3×3 */
   header{display:none!important}
   .sub,.panel,.note,.footer{display:none!important}
-  .sheet{padding:0;border-radius:0}
+  .sheet{padding:0;border-radius:0;margin:0;width:210mm;height:297mm}
   .grid{display:block}
-  .print-page{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:3mm;width:100%;height:281mm;break-inside:avoid;page-break-inside:avoid;margin:0}
+  .print-page{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,84mm);gap:3mm;width:210mm;height:258mm;padding:8mm 8mm 0;box-sizing:border-box;break-inside:avoid;page-break-inside:avoid;margin:0;overflow:hidden}
   .print-page:not(:last-child){break-after:page;page-break-after:always}
-  .card{padding:2.5mm;border-radius:4mm;box-shadow:none;border-width:1.2px;break-inside:avoid;page-break-inside:avoid;min-height:0;height:auto;overflow:hidden}
+  .card{padding:2.5mm;border-radius:4mm;box-shadow:none;border-width:1.2px;break-inside:avoid;page-break-inside:avoid;min-height:0;height:84mm;overflow:hidden}
   .no{font-size:8pt}
   .poke-img,.img-fallback{height:42mm}
   .name{font-size:13pt;margin:1mm 0 2mm}
@@ -117,7 +117,7 @@ function makeCard(id,name,badge=""){
 function renderCards(cards, modeText="") {
   const pages=[];
   for(let i=0;i<cards.length;i+=9){
-    pages.push(`<div class="print-page">${cards.slice(i,i+16).join("")}</div>`);
+    pages.push(`<div class="print-page">${cards.slice(i,i+9).join("")}</div>`);
   }
   const mode = modeText ? `<div class="mode">${modeText}<small>右上角紅色圓章就是要練習的注音</small></div>` : "";
   document.getElementById("grid").innerHTML = mode + pages.join("");
