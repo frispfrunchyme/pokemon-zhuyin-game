@@ -112,6 +112,60 @@ button{border:0;border-radius:14px;padding:12px 16px;font-size:16px;font-weight:
 }
 
 </style>
+
+<style id="zhuyin37-3x3-final">
+@media print {
+  /* 37音全覽：每頁 3×3，共9格 */
+  .overview-grid,
+  .full-overview,
+  .overview,
+  #overviewGrid,
+  .zhuyin-overview,
+  [class*="overview-grid"] {
+    display:grid !important;
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    grid-template-rows:repeat(3,minmax(0,1fr)) !important;
+    column-gap:3mm !important;
+    row-gap:3mm !important;
+    width:100% !important;
+    box-sizing:border-box !important;
+    break-inside:avoid !important;
+    page-break-inside:avoid !important;
+  }
+
+  .overview-grid > *,
+  .full-overview > *,
+  .overview > *,
+  #overviewGrid > *,
+  .zhuyin-overview > * {
+    min-width:0 !important;
+    min-height:0 !important;
+    height:auto !important;
+    box-sizing:border-box !important;
+    break-inside:avoid !important;
+    page-break-inside:avoid !important;
+  }
+
+  /* 不讓標題佔掉九格中的一格 */
+  .overview-title,
+  .full-overview-title {
+    grid-column:1 / -1 !important;
+  }
+}
+
+@media screen {
+  .overview-grid,
+  .full-overview,
+  .overview,
+  #overviewGrid,
+  .zhuyin-overview {
+    display:grid !important;
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    gap:3mm !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <div class="wrap">
@@ -122,7 +176,7 @@ button{border:0;border-radius:14px;padding:12px 16px;font-size:16px;font-weight:
 
 <section class="panel">
 <label for="maxNo">最高編號</label>
-<input id="maxNo" type="number" min="9" max="500" value="200">
+<input id="maxNo" type="number" min="9" max="1025" value="200">
 <button class="random" id="randomBtn">🎲 隨機 9 隻</button>
 <button class="rep" id="repBtn">⭐ 37 音全覽</button>
 <button class="print" id="printBtn">🖨️ 列印 A4</button>
@@ -194,7 +248,7 @@ function renderCards(cards, modeText=""){
 
 function random9(){
   let max=Number(document.getElementById("maxNo").value)||200;
-  max=Math.max(9,Math.min(500,max));
+  max=Math.max(9,Math.min(1025,max, NAMES.length));
   document.getElementById("maxNo").value=max;
   const a=Array.from({length:max},(_,i)=>i+1);
   for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}
@@ -211,7 +265,31 @@ function all37(){
 document.getElementById("randomBtn").onclick=random9;
 document.getElementById("repBtn").onclick=all37;
 document.getElementById("printBtn").onclick=()=>window.print();
-random9();
+
+// 載入完整的 1～1025 繁體中文名稱資料。
+// 網頁版透過 HTTPS 讀取公開 JSON；若網路暫時失敗，會保留內建的前 500 筆資料。
+async function loadFullNames(){
+  const status=document.getElementById("status");
+  try{
+    status.textContent="⏳ 正在載入完整寶可夢名稱資料（No.001～No.1025）…";
+    const r=await fetch("https://raw.githubusercontent.com/sindresorhus/pokemon/main/data/zh-hant.json",{cache:"no-store"});
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    const full=await r.json();
+    if(Array.isArray(full) && full.length>=1025){
+      NAMES.splice(0,NAMES.length,...full.slice(0,1025));
+      document.getElementById("maxNo").max="1025";
+      status.textContent="✅ 已載入 1～1025 號寶可夢；現在可隨機抽 9 隻。";
+      return true;
+    }
+    throw new Error("資料筆數不足");
+  }catch(e){
+    document.getElementById("maxNo").max=String(NAMES.length);
+    status.textContent=`⚠️ 完整名稱資料暫時無法載入，目前可抽 No.001～No.${NAMES.length}。請確認網路後重新整理。`;
+    return false;
+  }
+}
+
+loadFullNames().then(()=>random9());
 
 </script>
 </body>
