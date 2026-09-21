@@ -59,9 +59,9 @@ button{border:0;border-radius:14px;padding:12px 16px;font-size:16px;font-weight:
   }
   .grid:not(.rep-mode) .name{font-size:12pt!important;line-height:1.1!important;margin:.5mm 0 1.2mm!important;white-space:nowrap!important}
   .grid:not(.rep-mode) .chips{width:100%!important;min-height:18mm!important;height:auto!important;gap:1.2mm!important;flex-wrap:nowrap!important;justify-content:center!important;align-items:flex-start!important}
-  .grid:not(.rep-mode) .chip{width:12mm!important;height:22mm!important;min-width:12mm!important;min-height:22mm!important;border:.65mm solid #a9dafa!important;border-radius:2.5mm!important;background:#fff!important;font-size:0!important;flex:0 0 auto!important}
-  .grid:not(.rep-mode) .chips.five .chip{width:10.2mm!important;min-width:10.2mm!important}
-  .grid:not(.rep-mode) .chips.six .chip{width:8.8mm!important;min-width:8.8mm!important}
+  .grid:not(.rep-mode) .chip{width:12mm!important;height:22.5mm!important;min-width:12mm!important;min-height:22.5mm!important;border:.65mm solid #a9dafa!important;border-radius:2.5mm!important;background:#fff!important;font-size:0!important;flex:0 0 auto!important}
+  .grid:not(.rep-mode) .chips.five .chip{width:10.2mm!important;height:22.5mm!important;min-width:10.2mm!important;min-height:22.5mm!important}
+  .grid:not(.rep-mode) .chips.six .chip{width:8.8mm!important;height:22.5mm!important;min-width:8.8mm!important;min-height:22.5mm!important}
   .grid:not(.rep-mode) .badge{width:9mm!important;height:9mm!important;font-size:14pt!important;right:1.5mm!important;top:1.5mm!important}
 
   /* 37 音全覽：獨立使用較密的 6 欄版，避免標題佔掉一整格高度 */
@@ -166,6 +166,148 @@ button{border:0;border-radius:14px;padding:12px 16px;font-size:16px;font-weight:
 }
 </style>
 
+<style id="final-37-3x3-and-chip-22-5">
+/* 最終版：37音全覽改為每頁 3×3；空白注音格高度 22.5mm */
+.grid.rep-mode{
+  display:block !important;
+}
+.rep-page{
+  display:grid !important;
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  grid-template-rows:repeat(3,82mm) !important;
+  grid-auto-rows:82mm !important;
+  gap:2mm !important;
+  width:100% !important;
+  box-sizing:border-box !important;
+  margin:0 0 4mm 0 !important;
+}
+.grid.rep-mode .rep-page .card{
+  width:auto !important;
+  height:82mm !important;
+  min-height:0 !important;
+  box-sizing:border-box !important;
+}
+@media screen{
+  .grid.rep-mode{
+    display:block !important;
+  }
+  .rep-page{
+    margin-bottom:10px !important;
+  }
+}
+@media print{
+  .grid.rep-mode{
+    width:196mm !important;
+    display:block !important;
+    margin:0 !important;
+    padding:0 !important;
+  }
+  .grid.rep-mode .mode{
+    display:block !important;
+    width:100% !important;
+    min-height:12mm !important;
+    height:auto !important;
+    box-sizing:border-box !important;
+    margin:0 0 2mm 0 !important;
+    padding:2mm !important;
+    font-size:10pt !important;
+    text-align:center !important;
+  }
+  .grid.rep-mode .mode small{
+    display:block !important;
+    font-size:7pt !important;
+    margin-top:1mm !important;
+  }
+  .rep-page{
+    display:grid !important;
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    grid-template-rows:repeat(3,82mm) !important;
+    grid-auto-rows:82mm !important;
+    gap:2mm !important;
+    width:196mm !important;
+    height:248mm !important;
+    box-sizing:border-box !important;
+    margin:0 0 4mm 0 !important;
+    break-inside:avoid !important;
+    page-break-inside:avoid !important;
+    break-after:page !important;
+    page-break-after:always !important;
+  }
+  .rep-page:last-child{
+    margin-bottom:0 !important;
+    break-after:auto !important;
+    page-break-after:auto !important;
+  }
+  .grid.rep-mode .rep-page .card{
+    width:auto !important;
+    height:82mm !important;
+    min-height:0 !important;
+    padding:2mm 1.8mm 1.5mm !important;
+    box-sizing:border-box !important;
+    break-inside:avoid !important;
+    page-break-inside:avoid !important;
+  }
+  .grid.rep-mode .rep-page .poke-img,
+  .grid.rep-mode .rep-page .img-fallback{
+    width:72% !important;
+    height:34mm !important;
+    min-height:34mm !important;
+    max-height:34mm !important;
+    margin:.5mm auto !important;
+  }
+  .grid.rep-mode .rep-page .no{
+    font-size:7pt !important;
+    line-height:1 !important;
+    margin:0 0 .5mm !important;
+  }
+  .grid.rep-mode .rep-page .name{
+    font-size:11pt !important;
+    line-height:1.05 !important;
+    margin:.5mm 0 1mm !important;
+    min-height:7mm !important;
+    white-space:nowrap !important;
+  }
+  .grid.rep-mode .rep-page .chips{
+    width:100% !important;
+    min-height:23.5mm !important;
+    height:auto !important;
+    gap:1.2mm !important;
+    flex-wrap:nowrap !important;
+    justify-content:center !important;
+    align-items:flex-start !important;
+  }
+  .grid.rep-mode .rep-page .chip{
+    width:12mm !important;
+    height:22.5mm !important;
+    min-width:12mm !important;
+    min-height:22.5mm !important;
+    border:.65mm solid #a9dafa !important;
+    border-radius:2.5mm !important;
+    background:#fff !important;
+    font-size:0 !important;
+    flex:0 0 auto !important;
+  }
+  .grid.rep-mode .rep-page .chips.five .chip{
+    width:10.2mm !important;
+    min-width:10.2mm !important;
+    height:22.5mm !important;
+    min-height:22.5mm !important;
+  }
+  .grid.rep-mode .rep-page .chips.six .chip{
+    width:8.8mm !important;
+    min-width:8.8mm !important;
+    height:22.5mm !important;
+    min-height:22.5mm !important;
+  }
+  .grid.rep-mode .rep-page .badge{
+    width:8mm !important;
+    height:8mm !important;
+    font-size:12pt !important;
+    right:1.5mm !important;
+    top:1.5mm !important;
+  }
+}
+</style>
 </head>
 <body>
 <div class="wrap">
@@ -176,7 +318,7 @@ button{border:0;border-radius:14px;padding:12px 16px;font-size:16px;font-weight:
 
 <section class="panel">
 <label for="maxNo">最高編號</label>
-<input id="maxNo" type="number" min="9" max="1025" value="200">
+<input id="maxNo" type="number" min="9" max="1025" value="1025">
 <button class="random" id="randomBtn">🎲 隨機 9 隻</button>
 <button class="rep" id="repBtn">⭐ 37 音全覽</button>
 <button class="print" id="printBtn">🖨️ 列印 A4</button>
@@ -247,7 +389,7 @@ function renderCards(cards, modeText=""){
 }
 
 function random9(){
-  let max=Number(document.getElementById("maxNo").value)||200;
+  let max=Number(document.getElementById("maxNo").value)||1025;
   max=Math.max(9,Math.min(1025,max, NAMES.length));
   document.getElementById("maxNo").value=max;
   const a=Array.from({length:max},(_,i)=>i+1);
@@ -258,8 +400,16 @@ function random9(){
 }
 
 function all37(){
-  renderCards(REPRESENTATIVES.map(x=>makeCard(x.id,x.name,x.symbol)), "⭐ 37 音代表寶可夢全覽");
-  document.getElementById("status").textContent="⭐ 已產生 37 音全覽學習單；列印時會依 A4 自然分頁，不會額外製造空白頁。";
+  const grid = document.getElementById("grid");
+  grid.classList.add("rep-mode");
+  const title = `<div class="mode">⭐ 37 音代表寶可夢全覽<small>右上角紅色圓章就是要練習的注音</small></div>`;
+  const pages = [];
+  for(let i=0;i<REPRESENTATIVES.length;i+=9){
+    const group = REPRESENTATIVES.slice(i,i+9);
+    pages.push(`<div class="rep-page">${group.map(x=>makeCard(x.id,x.name,x.symbol)).join("")}</div>`);
+  }
+  grid.innerHTML = title + pages.join("");
+  document.getElementById("status").textContent="⭐ 已產生 37 音全覽學習單；列印時每頁固定 3×3，共 9 隻代表寶可夢。";
 }
 
 document.getElementById("randomBtn").onclick=random9;
