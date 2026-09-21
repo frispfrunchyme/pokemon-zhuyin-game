@@ -19,7 +19,7 @@ button{border:0;border-radius:14px;padding:12px 16px;font-size:16px;font-weight:
 .random{background:var(--yellow)} .rep{background:var(--pink)} .print{background:var(--green)}
 .note{text-align:center;margin:13px 0;color:#566b82;font-weight:800}
 .sheet{background:white;padding:12px;border-radius:18px}
-..grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
 .card{position:relative;min-width:0;background:var(--paper);border:2px dashed #8fc8ee;border-radius:17px;padding:11px;text-align:center;break-inside:avoid;box-shadow:0 5px 15px #4b719010}
 .card:nth-child(4n+2){background:#f8fdff} .card:nth-child(4n+3){background:#fff9fc} .card:nth-child(4n){background:#f9fff8}
 .no{font-size:12px;font-weight:900;color:#7d8ea0}
@@ -38,18 +38,20 @@ button{border:0;border-radius:14px;padding:12px 16px;font-size:16px;font-weight:
   @page{size:A4 portrait;margin:8mm}
   html,body{background:#fff}
   .wrap{max-width:none;padding:0}
-  header{padding:0 0 3mm}
-  h1{font-size:20pt;margin:0}
+  /* A4：9 隻固定同一張紙，3×3 */
+  header{display:none!important}
   .sub,.panel,.note,.footer{display:none!important}
   .sheet{padding:0;border-radius:0}
   .grid{display:block}
-  .print-page{display:grid;grid-template-columns:repeat(3,1fr);gap:4mm;break-inside:avoid;page-break-inside:avoid;margin:0 0 0}
+  .print-page{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:3mm;width:100%;height:281mm;break-inside:avoid;page-break-inside:avoid;margin:0}
   .print-page:not(:last-child){break-after:page;page-break-after:always}
-  .card{padding:3mm;border-radius:4mm;box-shadow:none;border-width:1.2px;break-inside:avoid;page-break-inside:avoid;min-height:78mm}
-  .no{font-size:9pt}
-  .poke-img,.img-fallback{height:43mm}
-  .name{font-size:15pt;margin:1.5mm 0 2mm}
-  .chip{width:11mm;height:15mm;padding:0;border-width:1px;border-radius:3mm;font-size:12pt;font-weight:900}
+  .card{padding:2.5mm;border-radius:4mm;box-shadow:none;border-width:1.2px;break-inside:avoid;page-break-inside:avoid;min-height:0;height:auto;overflow:hidden}
+  .no{font-size:8pt}
+  .poke-img,.img-fallback{height:42mm}
+  .name{font-size:13pt;margin:1mm 0 2mm}
+  .chips{gap:1.5mm}
+  .chip{width:10mm;height:13mm;padding:0;border-width:1px;border-radius:2.5mm;font-size:10pt;font-weight:900}
+  .badge{width:10mm;height:10mm;font-size:15pt;font-weight:1000;right:1.5mm;top:1.5mm}
   .badge{width:10mm;height:10mm;font-size:15pt;font-weight:1000;right:1.5mm;top:1.5mm;line-height:1}
   .mode{padding:2mm;font-size:11pt}
 }
