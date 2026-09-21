@@ -36,26 +36,53 @@ button{border:0;border-radius:14px;padding:12px 16px;font-size:16px;font-weight:
 @media(max-width:520px){.wrap{padding:10px}.panel{gap:8px}button{font-size:14px;padding:11px 12px}.grid{gap:9px}.card{padding:8px}.poke-img,.img-fallback{height:105px}.name{font-size:18px}.chip{width:40px;height:54px;font-size:16px}}
 @media print{
   @page{size:A4 portrait;margin:0}
-  html,body{background:#fff}
-  .wrap{max-width:none;padding:0}
-  /* A4：9 隻固定同一張紙，3×3 */
+  html,body{background:#fff!important;margin:0!important;padding:0!important;width:210mm;min-height:297mm;overflow:visible}
+  .wrap{max-width:none!important;width:210mm!important;margin:0!important;padding:0!important}
   header{display:none!important}
-  .sub,.panel,.note,.footer{display:none!important}
-  .sheet{padding:0;border-radius:0;margin:0;width:210mm;height:297mm}
-  .grid{display:block}
-  /* 一張 A4 內固定 3×3：高度含 padding，避免第三排溢出到第二頁 */
-  .print-page{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,1fr);gap:2mm;width:210mm;height:297mm;padding:6mm 8mm;box-sizing:border-box;break-inside:avoid;page-break-inside:avoid;break-after:page;page-break-after:always;margin:0;overflow:hidden}
-  .print-page:last-child{break-after:auto;page-break-after:auto}
-  .card{padding:2mm;border-radius:4mm;box-shadow:none;border-width:1.2px;break-inside:avoid;page-break-inside:avoid;min-height:0;height:auto;overflow:hidden}
+  .sub,.panel,.note,.footer,.mode{display:none!important}
+  .sheet{padding:0!important;border-radius:0!important;margin:0!important;width:210mm!important;height:297mm!important;background:#fff;overflow:hidden}
+  .grid{display:block!important;width:210mm!important;height:297mm!important;margin:0!important;padding:0!important}
+
+  /* 一張 A4 = 3 欄 × 3 列，九張卡全部鎖在同一頁 */
+  .print-page{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    grid-template-rows:repeat(3,93mm);
+    column-gap:2mm;
+    row-gap:2mm;
+    width:210mm;
+    height:297mm;
+    padding:4mm 7mm 4mm;
+    margin:0;
+    box-sizing:border-box;
+    overflow:hidden!important;
+    break-inside:avoid!important;
+    page-break-inside:avoid!important;
+    break-after:page!important;
+    page-break-after:always!important;
+  }
+  .print-page:last-child{break-after:auto!important;page-break-after:auto!important}
+
+  .card{
+    width:auto!important;
+    height:93mm!important;
+    min-height:0!important;
+    padding:2.5mm!important;
+    margin:0!important;
+    border-radius:4mm;
+    box-shadow:none;
+    border-width:1.2px;
+    break-inside:avoid!important;
+    page-break-inside:avoid!important;
+    overflow:hidden!important;
+  }
   .no{font-size:8pt}
-  .poke-img,.img-fallback{height:43mm}
-  .name{font-size:13pt;margin:1mm 0 2mm}
-  .chips{gap:1.2mm}
-  /* 加大書寫框，但控制寬度，確保 3×3 不換列 */
-  .chip{width:11mm;height:15mm;padding:0;border-width:1px;border-radius:2.5mm;font-size:10.5pt;font-weight:900}
-  .badge{width:10mm;height:10mm;font-size:15pt;font-weight:1000;right:1.5mm;top:1.5mm}
+  .poke-img,.img-fallback{height:44mm!important;width:82%;object-fit:contain;margin:1mm auto!important}
+  .name{font-size:13pt;margin:1mm 0 1.5mm}
+  .chips{gap:1.5mm;justify-content:center}
+  /* 在不破壞 3×3 的前提下，盡量放大書寫框 */
+  .chip{width:12mm!important;height:17mm!important;padding:0;border-width:1px;border-radius:2.5mm;font-size:11pt;font-weight:900}
   .badge{width:10mm;height:10mm;font-size:15pt;font-weight:1000;right:1.5mm;top:1.5mm;line-height:1}
-  .mode{padding:2mm;font-size:11pt}
 }
 </style>
 </head>
